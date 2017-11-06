@@ -210,13 +210,13 @@ var colemanLiauNormalizedScore = function(clRawScore){
 
 var numberToLetterScore = function(numberScore){
 	var letterScore;
-	if (between(numberScore, 90, 100)){
+	if (between(numberScore, 82, 100)){
 		letterScore =  "A";
-	} else if (between(numberScore, 80, 90)) {
+	} else if (between(numberScore, 64, 82)) {
 		letterScore = "B";
-	} else if (between(numberScore, 70, 80)) {
+	} else if (between(numberScore, 46, 64)) {
 		letterScore = "C";
-	} else if (between(numberScore, 51, 70)) {
+	} else if (between(numberScore, 30, 46)) {
 		letterScore = "D";
 	}  else {
 		letterScore = "F";	
