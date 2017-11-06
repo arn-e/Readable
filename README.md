@@ -18,6 +18,7 @@ The readable score is derived from a combination of the following metrics :
 | ----------- | ------------------- |
 | 1.0.0 | 6.10.3 |
 | 1.0.1 | 6.10.3 |
+| 1.0.2 | 6.10.3 |
 
 ## Building and deploying
 
