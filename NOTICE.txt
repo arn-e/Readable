@@ -1,0 +1,13 @@
+Licenses used by Readable
+
+	Flesch Kincaid Readable Classifier
+	MIT
+	https://mvnrepository.com/artifact/com.kennycason/fleschkincaid/1.0
+
+	Syllable
+	MIT
+	https://www.npmjs.com/package/syllable
+
+	Coleman-liau
+	MIT
+	https://www.npmjs.com/package/coleman-liau

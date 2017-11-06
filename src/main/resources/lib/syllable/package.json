@@ -1,0 +1,148 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "syllable",
+        "scope": null,
+        "escapedName": "syllable",
+        "name": "syllable",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Users/arne.fostvedt/code/tmp/npm_module_test"
+    ]
+  ],
+  "_from": "syllable@latest",
+  "_id": "syllable@2.2.0",
+  "_inCache": true,
+  "_location": "/syllable",
+  "_nodeVersion": "4.0.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/syllable-2.2.0.tgz_1501181840500_0.6183963038492948"
+  },
+  "_npmUser": {
+    "name": "wooorm",
+    "email": "tituswormer@gmail.com"
+  },
+  "_npmVersion": "2.14.2",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "syllable",
+    "scope": null,
+    "escapedName": "syllable",
+    "name": "syllable",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/syllable/-/syllable-2.2.0.tgz",
+  "_shasum": "deca9483ba1757a2f27ab0365ff3b870c8c5fd1b",
+  "_shrinkwrap": null,
+  "_spec": "syllable",
+  "_where": "/Users/arne.fostvedt/code/tmp/npm_module_test",
+  "author": {
+    "name": "Titus Wormer",
+    "email": "tituswormer@gmail.com",
+    "url": "http://wooorm.com"
+  },
+  "bin": {
+    "syllable": "cli.js"
+  },
+  "bugs": {
+    "url": "https://github.com/wooorm/syllable/issues"
+  },
+  "contributors": [
+    {
+      "name": "Titus Wormer",
+      "email": "tituswormer@gmail.com",
+      "url": "http://wooorm.com"
+    }
+  ],
+  "dependencies": {
+    "normalize-strings": "^1.1.0",
+    "pluralize": "^6.0.0",
+    "trim": "0.0.1"
+  },
+  "description": "Count syllables in English words",
+  "devDependencies": {
+    "browserify": "^14.0.0",
+    "esmangle": "^1.0.0",
+    "execa": "^0.7.0",
+    "nyc": "^11.0.0",
+    "remark-cli": "^4.0.0",
+    "remark-preset-wooorm": "^3.0.0",
+    "tape": "^4.4.0",
+    "xo": "^0.18.0"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "deca9483ba1757a2f27ab0365ff3b870c8c5fd1b",
+    "tarball": "https://registry.npmjs.org/syllable/-/syllable-2.2.0.tgz"
+  },
+  "files": [
+    "problematic.json",
+    "index.js",
+    "cli.js"
+  ],
+  "gitHead": "d7ef1ec90892f74f25eb5f819359a4f58550b3d5",
+  "homepage": "https://github.com/wooorm/syllable#readme",
+  "keywords": [
+    "detect",
+    "syllables",
+    "natural",
+    "language",
+    "cli",
+    "bin"
+  ],
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "wooorm",
+      "email": "tituswormer@gmail.com"
+    }
+  ],
+  "name": "syllable",
+  "nyc": {
+    "check-coverage": true,
+    "lines": 100,
+    "functions": 100,
+    "branches": 100
+  },
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "remarkConfig": {
+    "plugins": [
+      "preset-wooorm"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wooorm/syllable.git"
+  },
+  "scripts": {
+    "build": "npm run build-md && npm run build-bundle && npm run build-mangle",
+    "build-bundle": "browserify index.js -s syllable > syllable.js",
+    "build-mangle": "esmangle syllable.js > syllable.min.js",
+    "build-md": "remark . -qfo",
+    "lint": "xo",
+    "test": "npm run build && npm run lint && npm run test-coverage",
+    "test-api": "node test",
+    "test-coverage": "nyc --reporter lcov tape test/index.js"
+  },
+  "version": "2.2.0",
+  "xo": {
+    "space": true,
+    "esnext": false,
+    "rules": {
+      "guard-for-in": "off"
+    },
+    "ignores": [
+      "syllable.js"
+    ]
+  }
+}

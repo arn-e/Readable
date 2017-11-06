@@ -1,0 +1,220 @@
+<body>
+	<div>
+		<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+	    <link rel="stylesheet" href="../../../assets/css/readable.css"
+	          data-th-href="${portal.assetUrl({'_path=css/readable.css'})}"
+	          type="text/css" media="all"/>
+	    <style data-th-if="${css}" data-th-text="${css}"></style>
+
+	    <div data-th-id="'readableid_' + ${uid}" class="readable">
+	        <div data-th-id="tabs" class="readable-tabs">
+	            <a data-th-id="tab_draft" href="#" onclick="return Readable.cv_branchToggle('draft');" data-th-class="${showMaster? '' : 'selected'}" data-th-remove="${contentDraft}? none : all">Draft branch</a>
+	            <a data-th-id="tab_master" href="#" onclick="return Readable.cv_branchToggle('master');" data-th-class="${showMaster? 'selected' : ''}" data-th-remove="${contentMaster}? none : all">Master branch</a>
+	        </div>
+
+	        <div data-th-id="draft" data-th-style="${showDraft? '' : 'display:none'}">
+                    <br />
+                    <div class="field-header-row">
+                        <h5 class="table-title">Document Score</h5>
+                        <h4 class="table-title left-wrapper" th:text="${agScoreDraft.letterScore}"></h4>
+                    </div>
+                    <div class="field-header-row">
+                        <h4 class="table-title"> </h4>
+                        <h4 class="table-title left-wrapper" th:text="${#numbers.formatDecimal(agScoreDraft.numberScore,0,2)}"></h4>
+                    </div>
+		        	<br/>
+		        <br/>
+                <br/>
+	        	<br/>
+		    	<tr data-th-each="contentItemDraft: ${contentDraft}">
+
+ 					<div class="field-header-row expand-trigger">
+    					<h6 class="table-title expand-trigger" th:text="${contentItemDraft.dataType}"></h6>
+			    		<h4 class="table-title right-wrapper expand-trigger" th:text="${contentItemDraft.letterScore}"}></h4>
+ 					</div>
+ 					<div>
+ 						<div class="field-header-row">
+	    					<h6 class="table-title expand-trigger" th:text="${contentItemDraft.dataName}"></h6>
+	    					<h5 class="table-title right-wrapper" th:text="${#numbers.formatDecimal(contentItemDraft.numberScore,0,2)}"></h5>
+ 						</div>
+                        <button class="pure-button table-title expand-trigger" th:text="${contentItemDraft.fieldName}">Toggle All Details</button>
+	    			</div>		
+
+					<table border="1" class="expandable pure-table pure-table-bordered table-fill">
+		        		<thead>
+		        		</thead>
+		   				<tbody class="table-hover">
+				        	<tr>
+			   					<td class="text-left table-content">Field Name</td>
+			   					<td class="text-left table-content" th:text="${contentItemDraft.fieldName}"></td>
+			   				</tr>
+				        	<tr>
+			   					<td class="text-left table-content">isText</td>
+			   					<td class="text-left table-content" th:text="${contentItemDraft.isText}"></td>
+			   				</tr>
+				        	<tr>
+			   					<td class="text-left table-content">Letter Grade</td>
+			   					<td class="text-left table-content" th:text="${contentItemDraft.letterScore}"></th>
+			   				</tr>
+				        	<tr>
+			   					<td class="text-left table-content">Average Score</td>
+			   					<td class="text-left table-content" th:text="${#numbers.formatDecimal(contentItemDraft.numberScore,0,2)}"></th>
+			   				</tr>
+				        	<tr>
+			   					<td class="text-left table-content">FK Score</td>
+			   					<td class="text-left table-content" th:text="${#numbers.formatDecimal(contentItemDraft.fleschKincaidScore,0,2)}"></th>
+			   				</tr>
+				        	<tr>
+			   					<td class="text-left table-content">CL Score</td>
+			   					<td class="text-left table-content" th:text="${#numbers.formatDecimal(contentItemDraft.colemanLiauScore,0,2)}"></td>
+			   				</tr>
+				        	<tr>
+				        		<td class="text-left table-content">Spache Score</td>
+			   					<td class="text-left table-contentj" th:text="${#numbers.formatDecimal(contentItemDraft.spacheScore,0,2)}"></td>
+							</tr>
+				        	<tr>
+				        		<td class="text-left table-content">Syllable Count</td>
+			   					<td class="text-left table-content" th:text="${#numbers.formatInteger(contentItemDraft.syllableScore,0)}"></td>
+							</tr>
+							<tr class="expand-trigger">
+				        		<td class="text-left expand-trigger table-content">Sentences +20 Syllables</td>
+			   					<td class="text-left expand-trigger table-contentj" th:text="${#numbers.formatInteger(contentItemDraft.lexerResults.redFlagSentenceCount,0)}"></td>
+							</tr>
+							<tr class="expandable">
+								<td colspan="2">
+									<div data-th-each="redFlagSentence: ${contentItemDraft.lexerResults.redFlagSentences}">
+								      <div th:text="${redFlagSentence.sentence}"></div>
+								    </div>
+								</td>
+							</tr>
+							<tr class="expand-trigger">
+				        		<td class="text-left expand-trigger table-content">Words +4 Syllables</td>
+                                <td class="text-left expand-trigger table-content" th:text="${contentItemDraft.lexerResults.redFlagWordCount}"></td>
+                            </tr>
+                            <tr class="expandable">
+								<td colspan="2">
+									<div data-th-each="redFlagWord: ${contentItemDraft.lexerResults.redFlagWords}">
+								      <div th:text="${redFlagWord.word}"></div>
+								    </div>
+								</td>
+							</tr>
+                            <tr class="expand-trigger">
+                            	<td colspan="2" class="text-left expand-trigger table-content">Full Text</td>
+                            </tr>
+                            <tr class="expandable">
+                            	<td colspan="2" class="full-text-field" th:text="${contentItemDraft.fullText}"></td>
+                            </tr>
+
+						</tbody>
+					</table>
+                    <br/>
+                    <br/>
+			</div>
+
+
+
+            <div data-th-id="master" data-th-style="${showMaster? '' : 'display:none'}">
+                <br />
+                <div class="field-header-row">
+                    <h5 class="table-title">Document Score</h5>
+                    <h4 class="table-title left-wrapper" th:text="${agScoreMaster.letterScore}"></h4>
+                </div>
+                <div class="field-header-row">
+                    <h4 class="table-title"> </h4>
+                    <h4 class="table-title left-wrapper" th:text="${#numbers.formatDecimal(agScoreMaster.numberScore,0,2)}"></h4>
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <tr data-th-each="contentItemMaster: ${contentMaster}">
+
+                    <div class="field-header-row expand-trigger">
+                        <h6 class="table-title expand-trigger" th:text="${contentItemMaster.dataType}"></h6>
+                        <h4 class="table-title right-wrapper expand-trigger" th:text="${contentItemMaster.letterScore}"}></h4>
+                    </div>
+                    <div>
+                        <div class="field-header-row">
+                            <h6 class="table-title expand-trigger" th:text="${contentItemMaster.dataName}"></h6>
+                            <h5 class="table-title right-wrapper" th:text="${#numbers.formatDecimal(contentItemMaster.numberScore,0,2)}"></h5>
+                        </div>
+                        <button class="pure-button table-title expand-trigger" th:text="${contentItemMaster.fieldName}">Toggle All Details</button>
+                    </div>
+
+                    <table border="1" class="expandable pure-table pure-table-bordered table-fill">
+                        <thead>
+                        </thead>
+                        <tbody class="table-hover">
+                        <tr>
+                            <td class="text-left table-content">Field Name</td>
+                            <td class="text-left table-content" th:text="${contentItemMaster.fieldName}"></td>
+                        </tr>
+                        <tr>
+                            <td class="text-left table-content">isText</td>
+                            <td class="text-left table-content" th:text="${contentItemMaster.isText}"></td>
+                        </tr>
+                        <tr>
+                            <td class="text-left table-content">Letter Grade</td>
+                            <td class="text-left table-content" th:text="${contentItemMaster.letterScore}"></th>
+                        </tr>
+                        <tr>
+                            <td class="text-left table-content">Average Score</td>
+                            <td class="text-left table-content" th:text="${#numbers.formatDecimal(contentItemMaster.numberScore,0,2)}"></th>
+                        </tr>
+                        <tr>
+                            <td class="text-left table-content">FK Score</td>
+                            <td class="text-left table-content" th:text="${#numbers.formatDecimal(contentItemMaster.fleschKincaidScore,0,2)}"></th>
+                        </tr>
+                        <tr>
+                            <td class="text-left table-content">CL Score</td>
+                            <td class="text-left table-content" th:text="${#numbers.formatDecimal(contentItemMaster.colemanLiauScore,0,2)}"></td>
+                        </tr>
+                        <tr>
+                            <td class="text-left table-content">Spache Score</td>
+                            <td class="text-left table-contentj" th:text="${#numbers.formatDecimal(contentItemMaster.spacheScore,0,2)}"></td>
+                        </tr>
+                        <tr>
+                            <td class="text-left table-content">Syllable Count</td>
+                            <td class="text-left table-content" th:text="${#numbers.formatInteger(contentItemMaster.syllableScore,0)}"></td>
+                        </tr>
+                        <tr class="expand-trigger">
+                            <td class="text-left expand-trigger table-content">Sentences +20 Syllables</td>
+                            <td class="text-left expand-trigger table-contentj" th:text="${#numbers.formatInteger(contentItemMaster.lexerResults.redFlagSentenceCount,0)}"></td>
+                        </tr>
+                        <tr class="expandable">
+                            <td colspan="2">
+                                <div data-th-each="redFlagSentence: ${contentItemMaster.lexerResults.redFlagSentences}">
+                                    <div th:text="${redFlagSentence.sentence}"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="expand-trigger">
+                            <td class="text-left expand-trigger table-content">Words +4 Syllables</td>
+                            <td class="text-left expand-trigger table-content" th:text="${contentItemMaster.lexerResults.redFlagWordCount}"></td>
+                        </tr>
+                        <tr class="expandable">
+                            <td colspan="2">
+                                <div data-th-each="redFlagWord: ${contentItemMaster.lexerResults.redFlagWords}">
+                                    <div th:text="${redFlagWord.word}"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="expand-trigger">
+                            <td colspan="2" class="text-left expand-trigger table-content">Full Text</td>
+                        </tr>
+                        <tr class="expandable">
+                            <td colspan="2" class="full-text-field" th:text="${contentItemMaster.fullText}"></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <br/>
+                    <br/>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script data-th-src="${portal.assetUrl({'_path=js/readable-client.js'})}"></script>
+
+
