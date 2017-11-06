@@ -1,6 +1,6 @@
 # Readable
 
-### Readable Scoring Widget for Enonic XP
+### Readability Scoring Widget for Enonic XP
 
 ## Description 
 
@@ -9,8 +9,8 @@ The readable score is derived from a combination of the following metrics :
 
 * Flesch-Kincaid 
 * Coleman-Liau
-* Syllables per word
-* Syllables per sentence
+* Syllables over words
+* Syllables over sentences
 
 ## Releases and Compatibility
 
@@ -31,5 +31,4 @@ To deploy the app, set `$XP_HOME` environment variable and enter:
 ## Resources
 
 * https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests
-* https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readable_tests
 * https://en.wikipedia.org/wiki/Coleman%E2%80%93Liau_index
