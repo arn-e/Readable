@@ -12,11 +12,24 @@ The readable score is derived from a combination of the following metrics :
 * Syllables per word
 * Syllables per sentence
 
-## Installation
+## Releases and Compatibility
 
-Open your XP installation's Applications tool and click the "Install" button in the toolbar. Find the Readable widget in the Enonic Market tab and click "Install".
+| App version | Required XP version |
+| ----------- | ------------------- |
+| 1.0.0 | 6.10.3 |
 
+## Building and deploying
+
+Build this application from the command line. Go to the root of the project and enter:
+
+    ./gradlew clean build
+
+To deploy the app, set `$XP_HOME` environment variable and enter:
+
+    ./gradlew deploy
+    
 ## Resources
 
+* https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests
 * https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readable_tests
 * https://en.wikipedia.org/wiki/Coleman%E2%80%93Liau_index
