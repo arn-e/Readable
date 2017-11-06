@@ -25,11 +25,11 @@ var SPACHE_BASE = 0.659;
 
 var itemLengthText = function(item){
 	return (item.length > 25) ? true : false;
-}
+};
 
 var fleschKincaidCompute = function(text){
 	return __.toNativeObject(fleschKincaidBean.calculate(text));
-}
+};
 
 function colemanLiauCompute(counts) {
   if (!counts || !counts.sentence || !counts.word || !counts.letter) {
@@ -86,7 +86,7 @@ var sentenceLexer = function(sentence){
     results.redFlagWords = redFlagWords;
     results.isRedFlagSentence = isRedFlagSentence;
     return results;
-}
+};
 
 
 var textLexer = function(text){
@@ -127,7 +127,7 @@ var textLexer = function(text){
     results.wordList = wordList.toString();
 
     return results;
-}
+};
 
 var textPreProcessing = function(text){
 	var wordCount;
@@ -155,17 +155,17 @@ var textPreProcessing = function(text){
 	results.syllableCount = syllableCount;
 
 	return results
-}
+};
 
 var syllablesInText = function(text){
 	return syllable(text);
-}
+};
 
 var colemanLiauAnalysis = function(text){
 	var parseResults = textPreProcessing(text);
 	var colemanLiauScore = colemanLiauCompute(parseResults);
 	return colemanLiauScore;
-}
+};
 
 var spacheAnalysis = function(text){
 	//log.error('spacheAnalysis');
@@ -176,17 +176,17 @@ var spacheAnalysis = function(text){
 	    spacheScore : spacheScore,
         syllableCount: parseResults.syllableCount
 
-    }
+    };
 	return spacheScore;
-}
+};
 
 var between = function(x, min, max) {
   return x >= min && x <= max;
-}
+};
 	
 var weightColemanLiau = function(rawScore, max){
 	return (10 * (1 - (rawScore / max)));
-}
+};
 
 var colemanLiauNormalizedScore = function(clRawScore){
 	var normCLScore;
@@ -206,7 +206,7 @@ var colemanLiauNormalizedScore = function(clRawScore){
 		normCLScore = 0 + weightColemanLiau(clRawScore,18);
 	}
 	return normCLScore;
-}
+};
 
 var numberToLetterScore = function(numberScore){
 	var letterScore;
@@ -222,7 +222,7 @@ var numberToLetterScore = function(numberScore){
 		letterScore = "F";	
 	}
 	return letterScore;
-}
+};
 
 var summarizedScore = function(scores){
 	// log.error('summarizedScore');
@@ -233,10 +233,10 @@ var summarizedScore = function(scores){
 	scores = {
 		numberScore: avgScore,
 		letterScore: numberToLetterScore(avgScore)
-	}
+	};
 
 	return scores;
-}
+};
 
 var stripHtmlFromText = function(textWithHtml){
 	// TBD : complete
@@ -244,7 +244,7 @@ var stripHtmlFromText = function(textWithHtml){
 	cleanedText = cleanedText.replace('<p>','');
 	cleanedText = cleanedText.replace('</p>','');
 	return cleanedText;
-}
+};
 
 var textFromPageRegion = function(pageItem){
 	// log.error('textFromPageRegion');
@@ -262,7 +262,7 @@ var textFromPageRegion = function(pageItem){
 		// log.error(err);
 	}
 	return componentTextList;
-}
+};
 
 var analysisFromText = function(textItem){
 	//log.error('analysisFromText');
@@ -312,10 +312,10 @@ var analysisFromText = function(textItem){
 		syllableScore : syllableScore,
 		lexerResults : lexerResults,
 		sumScores : sumScores			
-	}
+	};
 
 	return result;
-}
+};
 
 var analysisFromPageObject = function(pageItem){
 	//log.error('analysisFromPageObject');
@@ -367,7 +367,7 @@ var analysisFromPageObject = function(pageItem){
 		})
 	}
 	return results;
-}
+};
 
 function isEdge(req) {
     var ua = req.headers['User-Agent'] || '';
@@ -383,7 +383,7 @@ var readResultsAssemblyFromList = function(analysisResultList){
 		readScoreList.push(readResult);
 	});
 	return readScoreList;
-}
+};
 
 
 var readResultsAssembly = function(analysisResults){
@@ -407,16 +407,16 @@ var readResultsAssembly = function(analysisResults){
 		readResult.fullText = val[10];
 		readResult.resultCount = toInteger(resultCount);
 		readScores.push(readResult);
-	})
+	});
 
 	return readScores;
-}
+};
 
 function toInteger(number){ 
   return Math.round( 
     Number(number)  
   ); 
-};
+}
 
 var handleCache = function(){
 //	tbd 
@@ -448,7 +448,7 @@ var getChildren = function(pageItem, treeList, nameList, pageResults){
 
 	var readScoreList = readResultsAssemblyFromList(pageResults);
 	return readScoreList;
-}
+};
 
 
 var handleTreeLookup = function(pageItem){
@@ -475,11 +475,11 @@ var handleTreeLookup = function(pageItem){
 	}
 
 	return readScoreList;
-}
+};
 
 var flattenList = function(list){
 	return [].concat.apply([], list);	
-}
+};
 
 var sumList = function(list){
 	var sum = 0;
@@ -488,11 +488,11 @@ var sumList = function(list){
 	});
 
 	return sum;
-}
+};
 
 var averageOfList = function(list){
 	return sumList(list) / list.length;
-}
+};
 
 var aggregateScore = function(list){
 	var scoreList = [];
@@ -513,7 +513,7 @@ var aggregateScore = function(list){
 	result.letterScore = numberToLetterScore(result.numberScore);
 
 	return result;
-}
+};
 
 exports.get = function (req) {
 	var activeBranch = 'draft';
@@ -549,7 +549,7 @@ exports.get = function (req) {
 		contentMaster: readScoresMasterListFlattened,
 		showMaster: activeBranch === 'master',
 		showDraft: activeBranch === 'draft'
-	}
+	};
 
 	// var dateStop = new Date();
 	// var timeStop = dateStop.getTime();
