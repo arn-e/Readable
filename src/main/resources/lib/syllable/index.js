@@ -1,6 +1,6 @@
 'use strict';
 
-var pluralize = require('/lib/pluralize');
+// var pluralize = require('/lib/pluralize');
 var normalize = require('normalize-strings');
 var problematic = require('./problematic.json');
 
