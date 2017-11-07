@@ -12,7 +12,7 @@
 	            <a data-th-id="tab_master" href="#" onclick="return Readable.cv_branchToggle('master');" data-th-class="${showMaster? 'selected' : ''}" data-th-remove="${contentMaster}? none : all">Master branch</a>
 	        </div>
 
-	        <div data-th-id="draft" data-th-style="${showDraft? '' : 'display:none'}">
+	        <div data-th-id="draft" data-th-style="${showDraft? '' : 'display:none'}" data-th-remove="${contentDraft}? none : all">
                     <br />
                     <div class="field-header-row">
                         <h5 class="table-title">Document Score</h5>
@@ -113,7 +113,7 @@
 
 
 
-            <div data-th-id="master" data-th-style="${showMaster? '' : 'display:none'}">
+            <div data-th-id="master" data-th-style="${showMaster? '' : 'display:none'}" data-th-remove="${contentMaster}? none : all">
                 <br />
                 <div class="field-header-row">
                     <h5 class="table-title">Document Score</h5>

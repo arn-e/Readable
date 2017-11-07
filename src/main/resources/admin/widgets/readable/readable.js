@@ -6,7 +6,6 @@ var cacheLib = require('/lib/cache');
 
 
 var fleschKincaidBean = __.newBean('com.kennycason.fleschkincaid.FleschKincaid');
-var pluralize = require('/lib/pluralize');
 
 var cache = cacheLib.newCache({
 	size: 100,
@@ -452,7 +451,6 @@ var getChildren = function(pageItem, treeList, nameList, pageResults){
 
 
 var handleTreeLookup = function(pageItem){
-
 	var pageResults = [];
 
 	var treeList = [];
@@ -520,6 +518,10 @@ exports.get = function (req) {
 	var uid = req.params.uid;
 	var contentId = req.params.contentId;
 
+    var readScoresMasterList;
+    var readScoresMasterListFlattened;
+    var agScoreMaster;
+
 	// var dateStart = new Date();
 	// var timeStart = dateStart.getTime();
 
@@ -528,17 +530,20 @@ exports.get = function (req) {
 	}
 
 	var contentDataDraft = contentLib.get({key: contentId, branch: 'draft'});
-	var contentDataMaster = contentLib.get({key: contentId, branch: 'master'});
+    var readScoresDraftList = handleTreeLookup(contentDataDraft);
+    var readScoresDraftListFlattened = flattenList(readScoresDraftList);
+    var agScoreDraft = aggregateScore(readScoresDraftListFlattened);
 
-	var readScoresDraftList = handleTreeLookup(contentDataDraft);
-	var readScoresMasterList= handleTreeLookup(contentDataMaster);
-
-	// TBD - possibly unflatten
-	var readScoresDraftListFlattened = flattenList(readScoresDraftList);
-	var readScoresMasterListFlattened = flattenList(readScoresMasterList);
-
-	var agScoreDraft = aggregateScore(readScoresDraftListFlattened);
-	var agScoreMaster = aggregateScore(readScoresMasterListFlattened);
+    var contentDataMaster = contentLib.get({key: contentId, branch: 'master'});
+    if (contentDataMaster === null) {
+        readScoresMasterList = null;
+        agScoreMaster = null;
+        readScoresMasterListFlattened = null;
+    } else {
+        readScoresMasterList= handleTreeLookup(contentDataMaster);
+	    readScoresMasterListFlattened = flattenList(readScoresMasterList);
+	    agScoreMaster = aggregateScore(readScoresMasterListFlattened);
+    }
 
 	var model = {
 		uid: uid,
