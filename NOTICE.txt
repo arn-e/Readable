@@ -8,6 +8,10 @@ Licenses used by Readable
 	MIT
 	https://www.npmjs.com/package/syllable
 
+    Normalize-strings
+    MIT
+    https://www.npmjs.com/package/normalize-strings
+
 	Coleman-liau
 	MIT
 	https://www.npmjs.com/package/coleman-liau
